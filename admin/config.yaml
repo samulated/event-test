@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: samulated/event-test
+
+media_folder: /public/uploads
+public_folder: /uploads
+
+collections:
+  - name: events
+    label: Events
+    label_singular: Event
+    folder: events/
+    identifier_field: id
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Status, name: status, widget: select,
+        options:{
+          - pending
+          - approved
+          - rejected
+          - cancelled
+        }, default: pending }
+      - { label: Starts at, name: starts_at, widget: datetime }
+      - { label: Ends at, name: ends_at, widget: datetime, required: false }
+      - { label: Location, name: location, widget: relation }
+      - { label: Organiser, name: organiser, widget: relation }
+      - { label: Description, name: description, widget: richtext }
+      - { label: Age Restricted, name: age-restricted, widget: boolean, default: false, required: false }
+      - { label: Registration URL, name: registration_url, widget: string, required: false }
+      - { label: Capacity, name: capacity, widget: number, required: false }
+      - { label: Categories, name: categories, widget: relation }
+      - { label: Calendars, name: calendars, widget: relation }
+      - { label: ID, name: id, widget: uuid, use_b32_encoding: true }
+      - { label: Created at, name: created_at, widget: datetime, default: {{now}} }
+      - { label: Updated at, name: updated_at, widget: datetime }
+      - { label: Approved at, name: approved_at, widget: datetime }
+      - { label: Published at, name: published_at, widget: datetime }
