@@ -1,0 +1,31 @@
+type: location
+id: rubix-warehouse-brunswick
+name: "Rubix Warehouse"
+slug: rubix-warehouse-brunswick
+
+address:
+  street_address: "36 Phoenix St"
+  locality: Brunswick
+  region: VIC
+  postal_code: "3056"
+  country_name: Australia
+address_visibility: full # full | suburb-only | hidden
+
+timezone: Australia/Melbourne
+
+url: "https://rubix.life/""
+socials: {}
+
+accessibility:
+  wheelchair_accessible: true
+  step_free_entry: true
+  accessible_toilets: true
+  notes: ""
+
+transport:
+  nearest_train: "Brunswick"
+  nearest_tram: "19"
+  nearest_bus: "506"
+  parking: "Street only"
+
+notes: ""

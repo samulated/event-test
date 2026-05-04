@@ -1,0 +1,29 @@
+uid: 2026-melbourne-bar-meet@furries.com.au
+title: Melbfur Tuesday Barmeet
+dtstart: 2026-01-17T18:30:00
+dtend: 2026-01-17T22:00:00
+timezone: Australia/Melbourne
+all_day: false
+status: confirmed   # confirmed, tentative, cancelled
+scope: local        # local, national, online
+state: VIC
+location:
+  name: The Bottom End
+  address: 579 Little Collins St
+  city: Melbourne
+  state: VIC
+organiser: Saba
+description: >
+  Weekly Barmeet in Melbourne! We are usually located away from the main bar, through the archway on the right.
+links:
+  telegram_group: https://t.me/melbfurbarmeet
+attendance: free    # free, paid
+recurrence:
+  frequency: weekly   # daily, weekly, monthly, yearly
+  interval: 1
+  byday: [TU]
+  until: 2026-12-08
+tags:
+  - meet
+  - 18+
+dtstamp: 2026-05-01T12:19:00

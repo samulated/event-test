@@ -1,0 +1,17 @@
+type: person
+id: fluke-badger
+name: "Fluke Badger"
+slug: fluke-badger
+
+url: ""
+photo: ""
+
+socials: {}
+
+contact: {}
+
+affiliations:
+  - id: thats-ruff
+    relationship: owner
+
+notes: ""

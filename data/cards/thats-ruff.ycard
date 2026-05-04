@@ -1,0 +1,21 @@
+type: organisation
+id: thats-ruff
+name: "That's Ruff"
+slug: thats-ruff
+
+url: "https://www.thatsruff.com"
+photo: ""
+
+socials: {}
+
+contact: {}
+
+location: thats-ruff-collingwood
+
+people:
+  - id: fluke-badger
+    relationsip: owner
+  - id: nap
+    relationship: owner
+
+notes: ""

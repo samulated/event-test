@@ -1,0 +1,25 @@
+type: event
+id: test-event
+name: "Test Event"
+slug: test-event
+
+start: 2026-05-05T12:00:00
+end: 2026-05-05T13:00:00
+timezone: Australia/Melbourne
+
+location: thats-ruff-collingwood
+organiser: verx
+
+summary: "This is a test event"
+description: |
+  This is a test event! I'm testing out my events stuff!
+
+categories:
+  - meet
+  - test
+
+uid: 2026-05-05-test-event
+
+status: published
+feeds:
+  - vic

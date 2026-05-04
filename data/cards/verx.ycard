@@ -1,0 +1,17 @@
+type: person
+id: verx
+name: "Verx"
+slug: verx
+
+url: ""
+photo: ""
+
+socials: {}
+
+contact: {}
+
+affiliations:
+  - id: vice-events
+    relationship: organiser
+
+notes: ""

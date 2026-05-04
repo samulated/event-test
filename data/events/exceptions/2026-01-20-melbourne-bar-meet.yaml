@@ -1,0 +1,12 @@
+uid: 2026-01-20-melbourne-bar-meet-relocated@furries.com.au
+parent_uid: 2026-melbourne-bar-meet@furries.com.au
+recurrence_id: 2026-01-20
+type: modified  # cancelled or modified
+reason: TBE closed for maintenance
+location:
+  name: Fortress Melbourne
+  address: Shop 25/23 Caledonian Ln
+  city: Melbourne
+  state: VIC
+dtstamp: 2026-05-01T12:37:00
+timezone: Australia/Melbourne
