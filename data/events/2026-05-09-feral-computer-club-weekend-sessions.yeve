@@ -1,0 +1,27 @@
+type: event
+id: feral-computer-club-weekend-sessions
+name: "Feral Computer Club: Weekend Sessions"
+slug: feral-computer-club-weekend-sessions
+
+start: 2026-05-09T12:00:00
+end: 2026-05-09T23:00:00
+timezone: Australia/Melbourne
+
+location: thats-ruff-collingwood
+organiser: feral-computer-club
+
+summary: "Come down to work on projects, and meet fellow pals that are interested in tech."
+description: |
+  Hey all! Our friends at That's Ruff have offered to host a lovely Feral Computer Club meet for us in COLLINGWOOD!
+
+  Come down to work on projects, meet fellow pals that are interested in tech, and peruse the venue!
+
+categories:
+  - meet
+  - crafternoon
+
+uid: 2026-05-09-feral-computer-club-weekend-sessions
+
+status: published
+feeds:
+  - vic
