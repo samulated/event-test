@@ -21,6 +21,9 @@ fs.readFile("data/events/2026-05-05-test-event.yeve", 'utf8', (err,data) => {
     stagingName = "";
     stagingData = [];
     firstlineOffset = false;
+    multilineParse = false;
+
+    eventObject = new Object();
 
     for (line in lines) {
         // need to identify whether single line object or multi-line object
@@ -40,14 +43,51 @@ fs.readFile("data/events/2026-05-05-test-event.yeve", 'utf8', (err,data) => {
         {
             // no key-value pair, this is either a multi-line structure or whitespace
             val = splitout[0].trim();
-            console.log(`1) ${val}`);
+            if (val.length > 0)
+            {
+                // do something with content
+                if (multilineParse)
+                {
+                    if (val.split('-').length > 1)
+                    {
+                        // list
+                    }
+                }
+                else
+                {
+                    console.log(`1) ${val}`);
+                }
+                
+            }
+            else
+            {
+                // only contains whitespace
+                if (multilineParse)
+                {
+                    multilineParse = false;
+                }
+            }
         }
         else if (splitout.length == 2)
         {
             // key value pair, mark to be parsed as such on next iteration.
             varName = splitout[0].trim();
-            console.log(`2) ${varName}`);
             varData = splitout[1].trim();
+
+            if (varData.length > 0)
+            {
+                if (varData.split("|") > 1)
+                {
+                    // pipe = multi-line string
+                    multilineParse = true;
+                }
+            }
+            else
+            {
+                multilineParse = true;
+            }
+            
+            console.log(`2) ${varName}`);
             console.log(`2) ${varData}`);
         }
         else if (splitout.length > 2)
