@@ -9,23 +9,16 @@ const server = createServer((req, res) => {
     res.end('Hello World');
 });
 
-const fs = require('node:fs');
-
-fs.readFile("data/events/2026-05-05-test-event.yeve", 'utf8', (err,data) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    const lines = data.split('\n');
-    
+function old_parseLines(lines) {
     stagingName = "";
     stagingData = [];
     firstlineOffset = false;
     multilineParse = false;
+    listParse = false;
 
     eventObject = new Object();
 
-    for (line in lines) {
+    for (line in lines) {        
         // need to identify whether single line object or multi-line object
         if (firstlineOffset)
         {
@@ -51,6 +44,9 @@ fs.readFile("data/events/2026-05-05-test-event.yeve", 'utf8', (err,data) => {
                     if (val.split('-').length > 1)
                     {
                         // list
+                        listVal = val.split('-')[1].trim();
+                        // console.log(`2)- ${listVal}`);
+                        stagingData.push(listVal);
                     }
                 }
                 else
@@ -65,6 +61,7 @@ fs.readFile("data/events/2026-05-05-test-event.yeve", 'utf8', (err,data) => {
                 if (multilineParse)
                 {
                     multilineParse = false;
+                    listParse = true;
                 }
             }
         }
@@ -88,7 +85,18 @@ fs.readFile("data/events/2026-05-05-test-event.yeve", 'utf8', (err,data) => {
             }
             
             console.log(`2) ${varName}`);
-            console.log(`2) ${varData}`);
+            if (!multilineParse)
+            {
+                if (listParse)
+                {
+                    console.log(`2) [ ${stagingData} ]`);
+                    stagingData = [];
+                }
+                else
+                {
+                    console.log(`2) ${varData}`);
+                }
+            }
         }
         else if (splitout.length > 2)
         {
@@ -101,6 +109,133 @@ fs.readFile("data/events/2026-05-05-test-event.yeve", 'utf8', (err,data) => {
         }
 
     }
+}
+
+function parseLines(lines) {
+    
+    key = "";
+    value = "";
+    valueList = [];
+
+    multilineParse = false;
+    listParse = false;
+    endParsing = false;
+    
+    for (line in lines) {
+        if (lines[line].trim().length == 0) {
+            // whitespace
+            if (multilineParse || listParse)
+            {
+                endParsing = true;
+            }
+        }
+
+        // get first Word
+            // if it has a colon (:) treat it as a keyword
+                // if there's a multi-line marker (|) to the right of the colon
+                    // activate multi-line string parsing
+                // otherwise if there's nothing there
+                    // activate list parsing
+                // otherwise treat the remainder as value of keyword.
+                    
+            // if it has a list symbol (-)
+                // get the remainder and add it to the value list
+        words = lines[line].trim().split(" ")
+        
+        if (words[0].split(":").length > 1)
+        {
+            key = words[0].split(":")[0];
+            if (listParse)
+            {
+                endParsing = true;
+            }
+
+            if (lines[line].trim().split("|").length > 1)
+            {
+                // multiline
+                multilineParse = true;
+            }
+            else if (lines[line].trim().split(" ").length > 1)
+            {
+                if (lines[line].trim().split(":").length > 2)
+                {
+                    // colon is listed in value
+                }
+                else if (lines[line].trim().split(":").length > 1)
+                {
+                    value = lines[line].trim().split(":")[1];
+                }
+            }
+            else
+            {
+                listParse = true;
+            }
+        }
+        else if (words[0].split("-").length > 1)
+        {
+            if (listParse)
+            {
+                valueList.push(lines[line].split("-")[1].trim());
+            }
+            else if(multilineParse)
+            {
+                valueList.push(lines[line].trim());
+            }
+            else
+            {
+                // might be an error
+            }
+        }
+        else
+        {
+            if (multilineParse)
+            {
+                valueList.push(lines[line].trim());
+            }
+        }
+
+        if (endParsing) {
+            // print key / value
+            console.log(`~ ${key}: [ ${valueList} ]`);
+            
+            // clear key / value
+            key = "";
+            value = "";
+            valueList = [];
+
+            // clear flags
+            multilineParse = false;
+            listParse = false;
+            endParsing = false;
+        }
+        if (key.trim().length > 0 && value.trim().length) {
+            // print key / value
+            console.log(`~ ${key}: ${value}`);
+            
+            // clear key / value
+            key = "";
+            value = "";
+            valueList = [];
+
+            // clear flags
+            multilineParse = false;
+            listParse = false;
+            endParsing = false;
+        }
+    }
+}
+
+const fs = require('node:fs');
+
+fs.readFile("data/events/2026-05-05-test-event.yeve", 'utf8', (err,data) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    const lines = data.split('\n');
+    
+    //old_parseLines(lines);
+    parseLines(lines);
 });
 
 server.listen(port, hostname, () => {
